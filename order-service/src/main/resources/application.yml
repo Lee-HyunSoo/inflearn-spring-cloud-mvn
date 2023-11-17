@@ -1,0 +1,62 @@
+# server port set
+server:
+  # use random port
+  port: 0
+
+# spring application name set
+spring:
+  application:
+    name: order-service
+  # zipkin set
+  zipkin:
+    base-url: http://127.0.0.1:9411
+    enabled: true
+  # sleuth set
+  sleuth:
+    sampler:
+      # 모든 로그를 zipkin 으로 보내는 설정
+      # % 개념으로, 1.0 으로 설정 하면 100% 보내겠다는 의미 [0.0 ~ 1.0]
+      probability: 1.0
+  h2:
+    console:
+      enabled: true
+      # 외부 접속 허용
+      settings:
+        web-allow-others: true
+      # 웹 브라우저에서 접속하는 h2 console의 주소
+      path: /h2-console
+  datasource:
+    driver-class-name: org.mariadb.jdbc.Driver
+    url: jdbc:mariadb://localhost:3306/mydb
+    username: root
+    password: 1234
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+
+# eureka client set
+eureka:
+  # 실행 된 서버들을 구별 하기 위한 instance-id set
+  instance:
+    instance-id: ${spring.application.name}:${spring.application.instance_id:${random.value}}
+  #    instance-id: ${spring.cloud.client.hostname}:${spring.application.instance_id:${random.value}}
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    # eureka client 로서 eureka server 의 위치를 알아야 client 로 등록이 가능
+    service-url:
+      # server 의 위치 지정
+      defaultZone: http://127.0.0.1:8761/eureka
+
+# logging set
+logging:
+  level:
+    com.example.orderservice: debug
+
+# actuator set
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health, httptrace, info, metrics, prometheus
