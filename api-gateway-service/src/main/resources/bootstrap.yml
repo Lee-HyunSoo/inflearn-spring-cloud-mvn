@@ -1,0 +1,12 @@
+# get config file
+spring:
+  cloud:
+    config:
+      uri: http://127.0.0.1:8888
+      # main file name
+      name: ecommerce
+      # 이렇게 서비스 이름을 쓰게 되면, 해당 서비스의 application.yml 파일을 불러오게 된다.
+#      name: config-service
+  # profile name
+#  profiles:
+#    active: dev
