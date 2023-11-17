@@ -1,0 +1,21 @@
+# eureka server port set
+server:
+  port: 8761
+
+# spring application name set
+spring:
+  application:
+    name: discovery-service
+  # eureka server 에서 config server 의 정보를 사용 할 가능성을 위해, 다른 프로젝트에서는 bootstrap.yml 에서 사용
+  cloud:
+    config:
+      uri: http://127.0.0.1:8888
+      # docker 에서 기동 된 ip address
+      name: ecommerce
+
+# eureka server set
+# eureka client option 은 default 가 true 이기 때문에 false 로 변경
+eureka:
+  client:
+    register-with-eureka: false
+    fetch-registry: false
