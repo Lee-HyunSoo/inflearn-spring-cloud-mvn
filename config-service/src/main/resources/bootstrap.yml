@@ -1,0 +1,11 @@
+# encrypt key set -> symmetric key 에 사용 하는 키라는 뜻
+encrypt:
+#  key: abcdefghijklmnopqrxtuvwxyz0123456789
+
+  # 암호화 된 파일의 경로 / password / alias 등록
+  key-store:
+    # windows 환경은 file:/// 로 사용
+#    location: file://${user.home}/Documents/spring-cloud-mvn/keystore/apiEncryptionKey.jks
+    location: file:/apiEncryptionKey.jks
+    password: test1234
+    alias: apiEncryptionKey
